@@ -27,9 +27,8 @@ Route::get('/component-test1', [ComponentTestController::class, 'showComponent1'
 
 Route::get('/component-test2', [ComponentTestController::class, 'showComponent2']);
 
-Route::get('/servicecontainertest', [LifeCycleTestController::class, 'showeServiceContainerTest']);
+Route::get('/servicecontainertest', [LifeCycleTestController::class, 'showServiceContainerTest']);
 
-Route::get('/Messagetest', [MessageTestController::class, 'showeMessageTest']);
-
+Route::get('/serviceprovidertest', [LifeCycleTestController::class, 'showServiceProviderTest']);
 
 require __DIR__.'/auth.php';
