@@ -33,7 +33,7 @@ class OwnersController extends Controller
         //dd($e_all, $q_get, $q_first, $c_test);
 
         //var_dump($q_get);
-        $owners = Owner::select('name', 'email', 'created_at')->get();
+        $owners = Owner::select('id', 'name', 'email', 'created_at')->get();
         return view('admin.owners.index', 
         compact('owners'));
 
@@ -94,7 +94,9 @@ class OwnersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $owner = Owner::findOrFail($id);
+        //dd($owner);
+        return view('admin.owners.edit',compact('owner'));
     }
 
     /**
@@ -106,7 +108,16 @@ class OwnersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $owner = Owner::FindorFail($id);
+        $owner->name = $request->name;
+        $owner->email = $request->email;
+        $owner->password = Hash::make($request->password);
+        $owner->save();
+
+        return redirect()
+        ->route('admin.owners.index')
+        ->with('message','オーナー情報を更新しました。');
+
     }
 
     /**
