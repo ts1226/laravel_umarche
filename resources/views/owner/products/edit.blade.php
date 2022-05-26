@@ -12,6 +12,7 @@
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
                     <form method="post" action="{{ route('owner.products.update' , [ 'product' => $product->id ])}}" >
                         @csrf
+                        @method('put')
                         <div class="-m-2">
                             <div class="p-2 w-1/2 mx-auto">
                                 <div class="relative">
@@ -90,8 +91,8 @@
                             <x-select-image :images="$images" name="image5" />
                             <div class="p-2 w-1/2 mx-auto">
                                 <div class="relative flex justify-around">
-                                <div><input type="radio" name="is_selling" value="1" class="mr-2" @if($product->is_selling === 1) { checked }>販売中</div>
-                                <div><input type="radio" name="is_selling" value="0" class="mr-2" @if($product->is_selling === 0) { checked }>停止中</div>
+                                <div><input type="radio" name="is_selling" value="1" class="mr-2" @if($product->is_selling === 1) { checked } @endif>販売中</div>
+                                <div><input type="radio" name="is_selling" value="0" class="mr-2" @if($product->is_selling === 0) { checked } @endif>停止中</div>
                             </div>
                             <div class="p-2 w-full flex justify-around mt-4">
                                 <button type="button" onclick="location.href='{{ route('owner.products.index')}}'"class="bg-gray-200 border-0 py-2 px-8 focus:outline-none hover:bg-gray-400 rounded text-lg">戻る</button>
