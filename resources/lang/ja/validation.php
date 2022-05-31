@@ -119,7 +119,8 @@ return [
     'attributes' => [
         'name'=>'名前',
         'email'=>'メールアドレス',
-        'password'=>'パスワード'
+        'password'=>'パスワード',
+        'quantity' => '数量',
     ],
 
 ];

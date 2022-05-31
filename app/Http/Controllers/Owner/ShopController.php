@@ -63,7 +63,7 @@ class ShopController extends Controller
             $fileNameToStore = ImageService::upload($imageFile,'shops');
         }
 
-        $shop = Shop::FindorFail($id);
+        $shop = Shop::FindOrFail($id);
         $shop->name = $request->name;
         $shop->information = $request->information;
         $shop->is_selling= $request->is_selling;

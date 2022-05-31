@@ -10,6 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                    <x-flash-message status="session('status')" />
                     <form method="post" action="{{ route('owner.products.update' , [ 'product' => $product->id ])}}" >
                         @csrf
                         @method('put')
@@ -40,7 +41,7 @@
                             </div>
                             <div class="p-2 w-1/2 mx-auto">
                                 <div class="relative">
-                                    <label for="current_quantity" class="leading-7 text-sm text-gray-600">初期在庫 ※必須</label>
+                                    <label for="current_quantity" class="leading-7 text-sm text-gray-600">現在の在庫</label>
                                     <input type="hidden" id="current_quantity" name="current_quantity" value="{{ $quantity }}">
                                     <div class="w-full bg-gray-100 bg-opacity-50 rounded text-base outline-none text-gray-700 py-1 px-3 leading-8" >{{ $quantity }}</div>
                                 </div>
@@ -53,14 +54,14 @@
                             <div class="p-2 w-1/2 mx-auto">
                                 <div class="relative">
                                     <label for="quantity" class="leading-7 text-sm text-gray-600">数量 ※必須</label>
-                                    <input type="number" id="quantity" name="quantity" value="0" required class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    <input type="number" id="quantity" name="quantity" value="0" required  class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                     <span>0~99の範囲で入力してください</span>
                                 </div>
                             </div>
                             <div class="p-2 w-1/2 mx-auto">
                                 <div class="relative">
                                     <label for="shop_id" class="leading-7 text-sm text-gray-600">販売する店舗</label>
-                                    <select name="shop_id" id="shop_id" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    <select name="shop_id" id="shop_id" class="w-full bg-gray-100 bg-opacity-50 rounded text-base outline-none text-gray-700 py-1 px-3 leading-8">
                                         @foreach($shops as $shop)
                                         <option value="{{ $shop->id }}" @if($shop->id === $product->shop_id) selected @endif>
                                             {{ $shop->name }}
@@ -111,7 +112,7 @@
     images.forEach( image => { // 1つずつ繰り返す
     image.addEventListener('click', function(e){ // クリックしたら
     const imageName = e.target.dataset.id.substr(0, 6) //data-idの6文字
-    const imageId = e.target.dataset.id.replace(imageName + '_', ʻ') // 6文字カット
+    const imageId = e.target.dataset.id.replace(imageName + '_', '') // 6文字カット
     const imageFile = e.target.dataset.file
     const imagePath = e.target.dataset.path
     const modal = e.target.dataset.modal
